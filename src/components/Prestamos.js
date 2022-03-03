@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Prestamos = () => {
   return (
@@ -16,7 +17,12 @@ const Prestamos = () => {
                             placeholder="Código"
                         />
                     </div>
-
+         <Link
+          to={"/prestamos2"}
+          className="btn btn-link mt-3"
+        >
+          Aceptar
+        </Link>
                     <button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-100">Aceptar</button>
                 </form>
 
