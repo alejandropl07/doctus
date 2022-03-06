@@ -3,6 +3,7 @@ import {useState}   from "react";
 import { useNavigate } from "react-router-dom";
 
 // Redux
+import { crearNuevoPrestamoAction } from "../actions/prestamosAction";
 import { validarFormularioAction, validacionExito, validacionError } from "../actions/validacionAction";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,6 +14,7 @@ const Prestamos2 = () => {
     const navigate  = useNavigate();
 
     const   dispatch    =   useDispatch();
+    const   agregarPrestamo = (prestamo)    => dispatch(crearNuevoPrestamoAction(prestamo)) ;
     const   validarFormulario = ()    => dispatch(validarFormularioAction()) ;
     const   exitoValidacion = ()    => dispatch(validacionExito()) ;
     const   errorValidacion = ()    => dispatch(validacionError()) ;
@@ -32,16 +34,15 @@ const Prestamos2 = () => {
             return;
         }
 
-        
         //Si pasa la validadacion
         exitoValidacion();
 
         //Agregar prestamo
-    /*    agregarProducto({
-            nombre,
-            precio
+        agregarPrestamo({
+            idEjemplar,
+            fechaADevolver
         });
-*/
+
         //Redireccionar
         navigate('/');
     }
