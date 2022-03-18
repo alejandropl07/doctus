@@ -50,7 +50,6 @@ const Login = () => {
 
 
     signin({username, password}, config);
-    console.log(errorUsuario); 
     //Redireccionar
     if(usuarioState !== null){
     navigate('/principal');

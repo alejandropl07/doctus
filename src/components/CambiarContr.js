@@ -1,15 +1,19 @@
 import React from "react";
-import {useState} from "react";
+import {useState, useRef} from "react";
 import { useNavigate } from "react-router-dom";
+import clienteAxios from "../config/axios";
+import {useForm}    from    "react-hook-form";
 
 //Redux
 import { validarFormularioAction, validacionExito, validacionError } from "../actions/validacionAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const CambiarContr = () => {
-  const   [passwordOld,  guardarPasswordOld]  =   useState('');
-  const   [passwordNew,  guardarPasswordNew]  =   useState('');
-  const   [passwordNew2,  guardarPasswordNew2]  =   useState('');
+  const { register, handleSubmit, errors } = useForm();
+
+  const passwordOldRef =   useRef('');
+  const passwordNewRef =   useRef('');
+  const passwordNew2Ref =   useRef('');
 
   const navigate  = useNavigate();
 
@@ -21,6 +25,7 @@ const CambiarContr = () => {
 
   //Obtener los datos del state
   const error = useSelector((state) =>  state.error.error);
+  const usuario =   useSelector((state) =>  state.usuario.usuario.username);
 
   const submitCambiarContr =  e   =>{
     e.preventDefault();
@@ -28,23 +33,23 @@ const CambiarContr = () => {
     validarFormulario();
 
     //Validar
-    if(passwordOld.trim() === '' ||  passwordNew.trim() === ''  ||  passwordNew2.trim() === ''){
+    if(passwordOldRef.current.value.trim() === '' ||  passwordNewRef.current.value.trim() === ''  ||  passwordNew2Ref.current.value.trim() === ''){
         errorValidacion();
         return;
     }
-
-    
     //Si pasa la validadacion
     exitoValidacion();
 
-    //Crear el nuevo producto
-   // agregarProducto({
-   //     nombre,
-    //    precio
-   // });
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+
+    clienteAxios.put(`/api/users/${usuario}`, {password: passwordNewRef.current.value}, config);
 
     //Redireccionar
-    navigate('/principal');
+   // navigate('/principal');
 }
 
   return (
@@ -57,33 +62,30 @@ const CambiarContr = () => {
                     <div className="form-group">
                         <label>Contraseña actual</label>
                         <input 
-                            type="text" 
+                            type="password" 
                             className="form-control" 
                             placeholder="Contraseña actual"
-                            value={passwordOld} 
-                            onChange={e=>guardarPasswordOld(e.target.value)}
+                            ref={passwordOldRef} 
                         />
                     </div>
 
                     <div className="form-group">
                         <label>Contraseña nueva</label>
                         <input 
-                            type="text" 
+                            type="password" 
                             className="form-control" 
                             placeholder="Contraseña nueva"
-                            value={passwordNew} 
-                            onChange={e=>guardarPasswordNew(e.target.value)}
+                            ref={passwordNewRef}
                         />
                     </div>
 
                     <div className="form-group">
                         <label>Confirmar contraseña</label>
                         <input 
-                            type="text" 
+                            type="password" 
                             className="form-control" 
                             placeholder="Confirmar contraseña"
-                            value={passwordNew2} 
-                            onChange={e=>guardarPasswordNew2(e.target.value)}
+                            ref={passwordNew2Ref}
                         />
                     </div>
                 <button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-100">Actualizar</button>
