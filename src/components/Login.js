@@ -1,13 +1,15 @@
 import React from "react";
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import clienteAxios from "../config/axios";
 
 //Redux
 import { validarFormularioAction, validacionExito, validacionError } from "../actions/validacionAction";
+import { signinAction,  iniciarLoginExito,  iniciarLoginError } from "../actions/authAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
-  const   [user,  guardarUser]  =   useState('');
+  const   [username,  guardarUser]  =   useState('');
   const   [password,  guardarPassword]  =   useState('');
 
   const navigate  = useNavigate();
@@ -18,32 +20,43 @@ const Login = () => {
   const   exitoValidacion = ()    => dispatch(validacionExito()) ;
   const   errorValidacion = ()    => dispatch(validacionError()) ;
 
+  //Iniciar sesion
+  const   signin = (usuario)    => dispatch(signinAction(usuario)) ;
+
   //Obtener los datos del state
   const error = useSelector((state) =>  state.error.error);
+  const errorUsuario    =   useSelector((state) =>  state.usuario.error);
+  const usuarioState    =   useSelector((state) =>  state.usuario.usuario);
 
-  const submitLogin =  e   =>{
+  const submitLogin = (e)   =>{
     e.preventDefault();
 
     validarFormulario();
 
     //Validar
-    if(user.trim() === '' ||  password.trim() === ''){
+    if(username.trim() === '' ||  password.trim() === ''){
         errorValidacion();
         return;
     }
 
-    
     //Si pasa la validadacion
     exitoValidacion();
 
-    //Crear el nuevo producto
-   // agregarProducto({
-   //     nombre,
-    //    precio
-   // });
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
 
+
+    signin({username, password}, config);
+    console.log(errorUsuario); 
     //Redireccionar
+    if(usuarioState !== null){
     navigate('/principal');
+    }
+
+    
 }
 
   return (
@@ -59,7 +72,7 @@ const Login = () => {
                             type="text" 
                             className="form-control" 
                             placeholder="Usuario"
-                            value={user} 
+                            value={username} 
                             onChange={e=>guardarUser(e.target.value)}
                         />
                     </div>
@@ -77,7 +90,8 @@ const Login = () => {
                 <button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-100">Aceptar</button>
                 </form>
 
-                {error  ? <div  className="font-weight-bold alert alert-danger text-center mt-4">El usuario o contraseña no existen</div>  :null}
+                {error  ? <div  className="font-weight-bold alert alert-danger text-center mt-4">Debe insertar todos los datos</div>  :null}
+                {errorUsuario  ? <div  className="font-weight-bold alert alert-danger text-center mt-4">El usuario o contraseña no existen</div>  :null}
 
             </div>
         </div>
