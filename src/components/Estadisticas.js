@@ -26,7 +26,7 @@ const Estadisticas = () => {
         </Link>
 
         <Link
-          to={"/"}
+          to={"/usobiblioteca"}
           className="btn btn-link mt-3"
         >
           Estadísticas del uso de la biblioteca

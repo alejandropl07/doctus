@@ -17,6 +17,8 @@ import Login from "./components/Login";
 import CambiarContr from "./components/CambiarContr";
 import DocsMasDemandados from "./components/DocsMasDemandados";
 import DocsMasDemandados2 from "./components/DocsMasDemandados2";
+import UsoBiblioteca from "./components/UsoBiblioteca";
+import UsoBiblioteca2 from "./components/UsoBiblioteca2";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
                 <Route exact path="/estadisticas" element={<Estadisticas/>} />
                 <Route exact path="/docsmasdemandados" element={<DocsMasDemandados/>} />
                 <Route exact path="/docsmasdemandados2" element={<DocsMasDemandados2/>} />
+                <Route exact path="/usobiblioteca" element={<UsoBiblioteca/>} />
+                <Route exact path="/usobiblioteca2" element={<UsoBiblioteca2/>} />
             </Routes>
         </div>
     </Provider>
