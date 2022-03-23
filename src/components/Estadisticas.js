@@ -19,7 +19,7 @@ const Estadisticas = () => {
       <div className={classes.root}>
         
         <Link
-          to={"/"}
+          to={"/docsmasdemandados"}
           className="btn btn-link mt-3" 
         >
           Documentos más demandados

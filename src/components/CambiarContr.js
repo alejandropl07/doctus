@@ -40,6 +40,10 @@ const CambiarContr = () => {
     //Si pasa la validadacion
     exitoValidacion();
 
+    if(passwordNewRef.current.value !== passwordNew2Ref.current.value){
+        errorValidacion();
+        return;
+    }
     const config = {
         headers: {
             "Content-Type": "application/json"
