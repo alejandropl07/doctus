@@ -2,6 +2,9 @@ import {
     MAS_DEMANDADOS,
     MAS_DEMANDADOS_EXITO,
     MAS_DEMANDADOS_ERROR,
+    UTIL_DOCUMENTOS,
+    UTIL_DOCUMENTOS_EXITO,
+    UTIL_DOCUMENTOS_ERROR,
   } from "../types";
   
   // Cada reducer tiene su propio state
@@ -10,6 +13,7 @@ import {
     docsMasDemand: [],
     error: null,
     loading: false,
+    utilizDocs: [],
   };
   
   export default function (state = initialState, action) {
@@ -33,6 +37,28 @@ import {
           ...state,
           error: true,
           docsMasDemand: [],
+          loading: false,
+        };
+
+        case UTIL_DOCUMENTOS:
+        return {
+          ...state,
+          error: null,
+          loading: true,
+        };
+      case UTIL_DOCUMENTOS_EXITO:
+        return {
+          ...state,
+          error: false,
+          utilizDocs: action.payload,
+          loading: false,
+        };
+
+      case UTIL_DOCUMENTOS_ERROR:
+        return {
+          ...state,
+          error: true,
+          utilizDocs: [],
           loading: false,
         };
   
