@@ -10,6 +10,7 @@ import Prestamos from "./components/Prestamos";
 import Prestamos2 from "./components/Prestamos2";
 import Devoluciones from "./components/Devoluciones";
 import Sancionar from "./components/Sancionar";
+import Sancionar2 from "./components/Sancionar2";
 import DeboLibros from "./components/DeboLibros";
 import Listados from "./components/Listados";
 import Estadisticas from "./components/Estadisticas";
@@ -39,6 +40,7 @@ function App() {
                 <Route exact path="/devoluciones" element={<Devoluciones/>} />
                 <Route exact path="/debolibros" element={<DeboLibros/>} />
                 <Route exact path="/sancionar" element={<Sancionar/>} />
+                <Route exact path="/sancionar2" element={<Sancionar2/>} />
                 <Route exact path="/listados" element={<Listados/>} />
                 <Route exact path="/estadisticas" element={<Estadisticas/>} />
                 <Route exact path="/docsmasdemandados" element={<DocsMasDemandados/>} />

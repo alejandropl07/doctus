@@ -16,7 +16,7 @@ const Sancionar = () => {
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-100">Aceptar</button>
+                    <button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-100">Sancionar</button>
                 </form>
 
             </div>
