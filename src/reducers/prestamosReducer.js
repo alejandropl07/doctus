@@ -6,6 +6,9 @@ import {
     SANCION_USUARIO_EXITO,
     SANCION_USUARIO_ERROR,
     INICIAR_SANCION_EXITO,
+    DEVOLUCION,
+    DEVOLUCION_EXITO,
+    DEVOLUCION_ERROR,
   } from "../types";
   
   // Cada reducer tiene su propio state
@@ -62,6 +65,24 @@ import {
           sancion:  action.payload,
         };
   
+
+        case DEVOLUCION:
+        return {
+          ...state,
+          error: null,
+        };
+      case DEVOLUCION_EXITO:
+        return {
+          ...state,
+          error: null,
+        };
+
+      case DEVOLUCION_ERROR:
+        return {
+          ...state,
+          error: action.payload,
+        };
+
         default:
         return state;
     }

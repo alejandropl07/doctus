@@ -6,6 +6,9 @@ import {
     SANCION_USUARIO_EXITO,
     SANCION_USUARIO_ERROR,
     INICIAR_SANCION_EXITO,
+    DEVOLUCION,
+    DEVOLUCION_EXITO,
+    DEVOLUCION_ERROR,
   } from "../types";
 
   import clienteAxios from "../config/axios";
@@ -94,6 +97,59 @@ export  const agregarSancionExito =   ()  =>  ({
 
 export  const agregarSancionError =   (error)  =>  ({
     type:   SANCION_USUARIO_ERROR,
+    payload:    error
+});
+
+
+
+
+/*export function devolucionAction() {
+    return(dispatch)    =>  {
+        dispatch(devolucion());
+
+        //Eliminar en la API
+        clienteAxios.delete(`api/prestamo/${codBarras}`, devolucion)
+        .then(respuesta =>  {
+            console.log(respuesta);
+            dispatch(devolucionExito(devolucion))
+            Swal.fire({
+                title: "Devolución",
+                text: `Devolución exitosa`,
+                position: "center",
+                background: "white",
+                showConfirmButton: true,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar',            
+              });
+        })
+        .catch(error    =>{
+            dispatch(devolucionError(error))
+            Swal.fire({
+                title: "Error",
+                text: `No se tiene registrado el préstamo de ese libro`,
+                position: "center",
+                background: "white",
+                showConfirmButton: true,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar',            
+              });
+        })
+        
+    }
+}*/
+
+export  const devolucion =   ()  =>  ({
+    type:   DEVOLUCION
+});
+
+export  const devolucionExito =   ()  =>  ({
+    type:   DEVOLUCION_EXITO,
+});
+
+export  const devolucionError =   (error)  =>  ({
+    type:   DEVOLUCION_ERROR,
     payload:    error
 });
 
