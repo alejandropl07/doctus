@@ -5,6 +5,9 @@ import {
     UTIL_DOCUMENTOS,
     UTIL_DOCUMENTOS_EXITO,
     UTIL_DOCUMENTOS_ERROR,
+    NUM_DOCUMENTOS,
+    NUM_DOCUMENTOS_EXITO,
+    NUM_DOCUMENTOS_ERROR,
   } from "../types";
 
   import clienteAxios from "../config/axios";
@@ -48,7 +51,6 @@ export function obtenerUtilizacionDocumentosAction() {
     return(dispatch)    =>  {
         dispatch(utilDocumentos());
 
-        //Obtener documentos mas demandados
         clienteAxios.get('/api/documentos/docMasDem/?anno=2017&mes=3')
         .then(respuesta =>  {
             console.log(respuesta.data);
@@ -72,4 +74,36 @@ export  const utilDocumentosExito =   (utilizDocs)  =>  ({
 
 export  const utilDocumentosError =   ()  =>  ({
     type:   UTIL_DOCUMENTOS_ERROR,
+});
+
+
+
+// Obtener numero de documentos. Función principal
+export function obtenerNumeroDocumentosAction() {
+    return(dispatch)    =>  {
+        dispatch(numDocumentos());
+
+        clienteAxios.get('/api/documentos/numeroDeDocs')
+        .then(respuesta =>  {
+            console.log(respuesta.data);
+            dispatch(numDocumentosExito(respuesta.data))
+        })
+        .catch(error    =>{
+            console.log(error);
+            dispatch(numDocumentosError())
+        })
+    }
+}
+
+export  const numDocumentos =   ()  =>  ({
+    type:   NUM_DOCUMENTOS
+});
+
+export  const numDocumentosExito =   (numDocs)  =>  ({
+    type:   NUM_DOCUMENTOS_EXITO,
+    payload:    numDocs,
+});
+
+export  const numDocumentosError =   ()  =>  ({
+    type:   NUM_DOCUMENTOS_ERROR,
 });

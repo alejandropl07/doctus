@@ -1,34 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 
-const NumeroDeDocumentos2 = () => {
+import { obtenerNumeroDocumentosAction} from "../actions/estadisticasAction";
+
+const NumeroDeDocumentos = () => {
 
     const navigate  = useNavigate();
 
     const   dispatch    =   useDispatch();
+    useEffect(()  =>  {
+        const   obtenerNumDocumentos = ()    => dispatch(obtenerNumeroDocumentosAction()) ;
+        obtenerNumDocumentos();
+      },[]);
 
     // Obtener los datos del state
     const error =   useSelector((state) =>  state.estadisticas.error);
     const loading =   useSelector((state) =>  state.estadisticas.loading);
-    const prestPorUsuario =   useSelector((state) =>  state.estadPrestamo.prestPorUsuario);
+    const numDocs =   useSelector((state) =>  state.estadisticas.numDocs);
 
   return (
     <React.Fragment>
-    {error  ? <div  className="font-weight-bold alert alert-danger text-center mt-4">Error al cargar los prestamosumentos</div>
+    {error  ? <div  className="font-weight-bold alert alert-danger text-center mt-4">Error al cargar los documentos</div>
     : null
     }
     <div className="row justify-content-center mt-5">
-    <h2 className="text-center my-5">Utilización de Documentos</h2>
     <div    className="table-responsive row justify-content-center mt-5">
     <table  className="table    table-bordered">
         <thead>
-        
         <tr>
             <th>Total de ejemplares</th>
-            <th>21432432</th>
+            <th>212343243</th>
             <th>Total de títulos</th>
             <th>212343243</th>
             </tr>
@@ -99,4 +103,4 @@ const NumeroDeDocumentos2 = () => {
   );
 };
 
-export default NumeroDeDocumentos2;
+export default NumeroDeDocumentos;

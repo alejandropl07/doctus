@@ -40,7 +40,7 @@ const Estadisticas = () => {
         </Link>
 
         <Link
-          to={"/"}
+          to={"/numdocumentos"}
           className="btn btn-link mt-3"
         >
           Números de documentos

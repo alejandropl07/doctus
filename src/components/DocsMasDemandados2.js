@@ -1,11 +1,8 @@
 import React from "react";
-import {useState, useEffect}   from "react";
 import { useNavigate } from "react-router-dom";
 
 // Redux
-import { masDemandadosError, masDemandadosExito, obtenerMasDemandadosAction, masDemandados } from "../actions/estadisticasAction";
 import { useDispatch, useSelector } from "react-redux";
-import clienteAxios from "../config/axios";
 
 const DocsMasDemandados2 = () => {
 

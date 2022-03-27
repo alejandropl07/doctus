@@ -21,7 +21,6 @@ import UsoBiblioteca from "./components/UsoBiblioteca";
 import UsoBiblioteca2 from "./components/UsoBiblioteca2";
 import UtilizacionDeDocumentos from "./components/UtilizacionDeDocumentos";
 import NumeroDeDocumentos from "./components/NumeroDeDocumentos";
-import NumeroDeDocumentos2 from "./components/NumeroDeDocumentos";
 
 function App() {
   return (
@@ -47,7 +46,6 @@ function App() {
                 <Route exact path="/usobiblioteca2" element={<UsoBiblioteca2/>} />
                 <Route exact path="/utildocumentos" element={<UtilizacionDeDocumentos/>} />
                 <Route exact path="/numdocumentos" element={<NumeroDeDocumentos/>} />
-                <Route exact path="/numdocumentos2" element={<NumeroDeDocumentos2/>} />
             </Routes>
         </div>
     </Provider>
