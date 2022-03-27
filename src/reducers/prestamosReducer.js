@@ -2,12 +2,17 @@ import {
     AGREGAR_PRESTAMO,
     AGREGAR_PRESTAMO_EXITO,
     AGREGAR_PRESTAMO_ERROR,
+    SANCION_USUARIO,
+    SANCION_USUARIO_EXITO,
+    SANCION_USUARIO_ERROR,
+    INICIAR_SANCION_EXITO,
   } from "../types";
   
   // Cada reducer tiene su propio state
   
   const initialState = {
     prestamos: [],
+    sancion:  {ci:''},
     error: null,
   };
   
@@ -29,6 +34,32 @@ import {
         return {
           ...state,
           error: action.payload,
+        };
+
+
+        case SANCION_USUARIO:
+        return {
+          ...state,
+          error: null,
+        };
+      case SANCION_USUARIO_EXITO:
+        return {
+          ...state,
+          error: null,
+        };
+
+      case SANCION_USUARIO_ERROR:
+        return {
+          ...state,
+          error: action.payload,
+        };
+
+
+      case INICIAR_SANCION_EXITO:
+        return {
+          ...state,
+          error: null,
+          sancion:  action.payload,
         };
   
         default:

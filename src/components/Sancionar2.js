@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 // Redux
 import { validarFormularioAction, validacionExito, validacionError } from "../actions/validacionAction";
-import { masDemandadosError, masDemandadosExito, obtenerMasDemandadosAction, masDemandados } from "../actions/estadisticasAction";
+import { crearNuevaSancionAction } from "../actions/prestamosAction";
 import { useDispatch, useSelector } from "react-redux";
-import clienteAxios from "../config/axios";
 
 const Sancionar2 = () => {
-    const   [motivo,  guardarMotivo]  =   useState('');
+    const   [motivo,  guardarMotivo]  =   useState('Sancionado por atraso en la devolución');
     const   [fechaInicio,  guardarFechaInicio]  =   useState('');
     const   [fechaFin,  guardarFechaFin]  =   useState('');
     const   [observaciones,  guardarObservaciones]  =   useState('');
@@ -20,24 +19,30 @@ const Sancionar2 = () => {
     const   validarFormulario = ()    => dispatch(validarFormularioAction()) ;
     const   exitoValidacion = ()    => dispatch(validacionExito()) ;
     const   errorValidacion = ()    => dispatch(validacionError()) ;
+    const   agregarSancion  =   (sancion)  =>  dispatch(crearNuevaSancionAction(sancion));
 
     // Obtener los datos del state
     const error =   useSelector((state) =>  state.error.error);
+    const ci =   useSelector((state) =>  state.prestamos.sancion.ci);
 
 
-    //Buscar documentos más demandados
+    //Sancionar usuario
     const submitSancionar2 =  e   =>{
         e.preventDefault();
-     /*   masDemandados();
-        clienteAxios.get(`/api/documentos/docMasDem/?anno=${anno}&mes=${mes}`)
-        .then(respuesta =>  {
-            console.log(respuesta.data);
-            dispatch(masDemandadosExito(respuesta.data))
-        })
-        .catch(error    =>{
-            console.log(error);
-            dispatch(masDemandadosError())
-        })*/
+        validarFormulario();
+        if(motivo.trim() === '' ||  fechaInicio.trim()  === ''  ||  fechaFin.trim()  === ''){
+            errorValidacion();
+            return;
+        }
+            exitoValidacion();
+        agregarSancion({
+            ci,
+            motivo,
+            fechaInicio,
+            fechaFin,
+            observaciones,
+        });
+
 
         //Redireccionar
         navigate('/sancionar2');
@@ -51,17 +56,17 @@ const Sancionar2 = () => {
             <label>Motivo</label>
             <select className="form-control mx-sm-3"
                 onChange={e=>guardarMotivo(e.target.value)}
-                value={motivo}> 
-                <option value="0" selected>Sancionado por atraso en la devolución</option>
-                <option value="1">Baja definitiva</option>
-                <option value="2">Licencia temporal</option>
-                <option value="3">Permiso de salida</option>
-                <option value="4">Perdida de documento</option>
-                <option value="5">Repitencia</option>
-                <option value="6">Resolución</option>
-                <option value="7">Traslado</option>
-                <option value="9">Vacaciones</option>
-                <option value="10">Extracción de documento sin autorización</option>
+                value={motivo} > 
+                <option value="Sancionado por atraso en la devolución" selected>Sancionado por atraso en la devolución</option>
+                <option value="Baja definitiva">Baja definitiva</option>
+                <option value="Licencia temporal">Licencia temporal</option>
+                <option value="Permiso de salida">Permiso de salida</option>
+                <option value="Perdida de documento">Perdida de documento</option>
+                <option value="Repitencia">Repitencia</option>
+                <option value="Resolución">Resolución</option>
+                <option value="Traslado">Traslado</option>
+                <option value="Vacaciones">Vacaciones</option>
+                <option value="Extracción de documento sin autorización">Extracción de documento sin autorización</option>
             </select>
         </div>
         <div className="form-group  mt-5    mb-5    mx-sm-3">
@@ -93,8 +98,9 @@ const Sancionar2 = () => {
                 onChange={e=>guardarObservaciones(e.target.value)} 
             />
         </div>
-            <button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-30   mt-5    mb-5">Buscar</button>
+            <button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-30   mt-5    mb-5">Sancionar</button>
     </form>
+    {error  ? <div  className="font-weight-bold alert alert-danger text-center mt-4">Debe insertar todos los datos</div>  :null}
     </div>
   );
 };
