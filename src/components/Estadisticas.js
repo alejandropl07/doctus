@@ -47,7 +47,7 @@ const Estadisticas = () => {
         </Link>
 
         <Link
-          to={"/"}
+          to={"/sinfoliado"}
           className="btn btn-link mt-3"
         >
           Cantidad total de documentos sin foliados

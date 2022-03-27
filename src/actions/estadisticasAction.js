@@ -8,6 +8,9 @@ import {
     NUM_DOCUMENTOS,
     NUM_DOCUMENTOS_EXITO,
     NUM_DOCUMENTOS_ERROR,
+    SIN_FOLIADO,
+    SIN_FOLIADO_EXITO,
+    SIN_FOLIADO_ERROR,
   } from "../types";
 
   import clienteAxios from "../config/axios";
@@ -106,4 +109,35 @@ export  const numDocumentosExito =   (numDocs)  =>  ({
 
 export  const numDocumentosError =   ()  =>  ({
     type:   NUM_DOCUMENTOS_ERROR,
+});
+
+
+
+// Obtener numero de documentos. Función principal
+export function obtenerSinFoliadoAction() {
+    return(dispatch)    =>  {
+        dispatch(sinFoliado());
+
+        clienteAxios.get('/api/documentos/docsSinFol')
+        .then(respuesta =>  {
+            console.log(respuesta.data);
+            dispatch(sinFoliadoExito(respuesta.data))
+        })
+        .catch(error    =>{
+            dispatch(sinFoliadoError())
+        })
+    }
+}
+
+export  const sinFoliado =   ()  =>  ({
+    type:   SIN_FOLIADO
+});
+
+export  const sinFoliadoExito =   (sinFoliado)  =>  ({
+    type:   SIN_FOLIADO_EXITO,
+    payload:    sinFoliado,
+});
+
+export  const sinFoliadoError =   ()  =>  ({
+    type:   SIN_FOLIADO_ERROR,
 });

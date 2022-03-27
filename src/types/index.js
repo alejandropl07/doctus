@@ -25,3 +25,7 @@ export  const   UTIL_DOCUMENTOS_ERROR  =   'UTIL_DOCUMENTOS_ERROR';
 export  const   NUM_DOCUMENTOS  =   'NUM_DOCUMENTOS';
 export  const   NUM_DOCUMENTOS_EXITO  =   'NUM_DOCUMENTOS_EXITO';
 export  const   NUM_DOCUMENTOS_ERROR  =   'NUM_DOCUMENTOS_ERROR';
+
+export  const   SIN_FOLIADO  =   'SIN_FOLIADO';
+export  const   SIN_FOLIADO_EXITO  =   'SIN_FOLIADO_EXITO';
+export  const   SIN_FOLIADO_ERROR  =   'SIN_FOLIADO_ERROR';

@@ -8,6 +8,9 @@ import {
     NUM_DOCUMENTOS,
     NUM_DOCUMENTOS_EXITO,
     NUM_DOCUMENTOS_ERROR,
+    SIN_FOLIADO,
+    SIN_FOLIADO_EXITO,
+    SIN_FOLIADO_ERROR,
   } from "../types";
   
   // Cada reducer tiene su propio state
@@ -18,6 +21,7 @@ import {
     loading: false,
     utilizDocs: [],
     numDocs: [],
+    sinFoliado: [],
   };
   
   export default function (state = initialState, action) {
@@ -88,6 +92,30 @@ import {
             numDocs: [],
             loading: false,
           };
+
+
+
+          case SIN_FOLIADO:
+            return {
+              ...state,
+              error: null,
+              loading: true,
+            };
+          case SIN_FOLIADO_EXITO:
+            return {
+              ...state,
+              error: false,
+              sinFoliado: action.payload,
+              loading: false,
+            };
+    
+          case SIN_FOLIADO_ERROR:
+            return {
+              ...state,
+              error: true,
+              sinFoliado: [],
+              loading: false,
+            };
   
         default:
         return state;
